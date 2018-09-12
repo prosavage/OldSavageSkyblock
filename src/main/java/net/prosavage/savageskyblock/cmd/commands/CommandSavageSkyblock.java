@@ -19,12 +19,8 @@ public class CommandSavageSkyblock extends AbstractCommand {
         sender.sendMessage(GeneralUtil.color("  &7Version " + instance.getDescription().getVersion()));
 
 
-
         return false;
     }
-
-
-
 
 
 }

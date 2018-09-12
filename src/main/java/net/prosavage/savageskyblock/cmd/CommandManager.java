@@ -2,11 +2,11 @@ package net.prosavage.savageskyblock.cmd;
 
 import net.prosavage.savageskyblock.SavageSkyblock;
 import net.prosavage.savageskyblock.cmd.commands.CommandSavageSkyblock;
+import net.prosavage.savageskyblock.cmd.commands.CommandSetup;
 import net.prosavage.savageskyblock.util.GeneralUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,7 @@ public class CommandManager implements CommandExecutor {
         this.instance = instance;
 
         AbstractCommand commandSavageSkyblock = addCommand(new CommandSavageSkyblock());
+        addCommand(new CommandSetup(commandSavageSkyblock));
     }
 
     private AbstractCommand addCommand(AbstractCommand abstractCommand) {
@@ -44,7 +45,7 @@ public class CommandManager implements CommandExecutor {
                 }
             }
         }
-        commandSender.sendMessage(GeneralUtil.color("&b(!) &7The command you entered does not exist or is spelt incorrectly."));
+        commandSender.sendMessage(GeneralUtil.formattedMessage("The command you entered does not exist or is spelt incorrectly."));
         return true;
     }
 
@@ -53,6 +54,6 @@ public class CommandManager implements CommandExecutor {
             command.runCommand(instance, sender, strings);
             return;
         }
-        sender.sendMessage(GeneralUtil.color("&b(!) &7You do not have permission to perform this action."));
+        sender.sendMessage(GeneralUtil.formattedMessage("You do not have permission to perform this action."));
     }
 }

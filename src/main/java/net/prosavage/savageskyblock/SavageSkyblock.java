@@ -1,7 +1,6 @@
 package net.prosavage.savageskyblock;
 
 import net.prosavage.savageskyblock.cmd.CommandManager;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -43,8 +42,6 @@ public class SavageSkyblock extends JavaPlugin {
         File configFile = new File(getDataFolder(), "config.yml");
         return configFile.exists();
     }
-
-
 
 
 }
