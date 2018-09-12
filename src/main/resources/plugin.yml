@@ -1,8 +1,10 @@
 name: SavageSkyblock
 main: net.prosavage.savageskyblock.SavageSkyblock
 version: 1.0-SNAPSHOT
+load: POSTWORLD
 api-version: 1.13
 description: The ultimate skyblock plugin
+softdepend: [WorldEdit, Vault]
 author: ProSavage
 commands:
   skyblock:
