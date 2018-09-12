@@ -30,7 +30,7 @@ public class SavageSkyblock extends JavaPlugin {
 
 
         this.getLogger().info("Registering Commands...");
-        this.getCommand("EpicSpawners").setExecutor(new CommandManager(this));
+        this.getCommand("skyblock").setExecutor(new CommandManager(this));
     }
 
     @Override

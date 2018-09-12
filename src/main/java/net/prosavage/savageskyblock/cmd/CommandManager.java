@@ -1,6 +1,7 @@
 package net.prosavage.savageskyblock.cmd;
 
 import net.prosavage.savageskyblock.SavageSkyblock;
+import net.prosavage.savageskyblock.cmd.commands.CommandSavageSkyblock;
 import net.prosavage.savageskyblock.util.GeneralUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,9 +20,7 @@ public class CommandManager implements CommandExecutor {
     public CommandManager(SavageSkyblock instance) {
         this.instance = instance;
 
-
-
-
+        AbstractCommand commandSavageSkyblock = addCommand(new CommandSavageSkyblock());
     }
 
     private AbstractCommand addCommand(AbstractCommand abstractCommand) {
@@ -55,6 +54,5 @@ public class CommandManager implements CommandExecutor {
             return;
         }
         sender.sendMessage(GeneralUtil.color("&b(!) &7You do not have permission to perform this action."));
-
     }
 }
