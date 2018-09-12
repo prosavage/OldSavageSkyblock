@@ -1,6 +1,6 @@
 name: SavageSkyblock
 main: net.prosavage.savageskyblock.SavageSkyblock
-version: ${project.version}
+version: 1.0-SNAPSHOT
 api-version: 1.13
 description: The ultimate skyblock plugin
 author: ProSavage
