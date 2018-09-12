@@ -24,6 +24,7 @@ public class SetupUtil {
             //TODO: Remove the test code.
             // Testing code by placing 1 bedrock and teleporting to spawn location
             GeneralUtil.getSkyblockWorld().getBlockAt(new Location( GeneralUtil.getSkyblockWorld(), 0, 0, 0)).setType(MultiversionMaterials.BEDROCK.parseMaterial());
+            // Check if player because we cannot teleport a console!
             if (sender instanceof Player) {
                 sender.sendMessage(GeneralUtil.formattedMessage("Teleporting to world!"));
                 ((Player) sender).teleport(new Location(GeneralUtil.getSkyblockWorld(), 0, 3, 0));
