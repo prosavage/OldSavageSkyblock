@@ -1,0 +1,24 @@
+package net.prosavage.savageskyblock.hooks;
+
+public class HookManager {
+
+	private static Map<String, PluginHook<?>> pluginMap = new HashMap<>();
+
+	public HookManager(List<PluginHook<?>> list) {
+		for (PluginHook<?> hook : list) {
+			pluginMap.put(hook.getName(), (PluginHook<?>) hook.setup());
+			if (SavageSkyblock.getInstance().getServer().getPluginManager().getPlugin(hook.getName()) != null) {
+        //FAILED
+				//Logger.print("successfully hooked " + hook.getName(), PrefixType.DEFAULT);
+			} else {
+        //FAILED
+				//Logger.print("could not hook " + hook.getName(), PrefixType.WARNING);
+			}
+		}
+	}
+
+	public static Map<String, PluginHook<?>> getPluginMap() {
+		return pluginMap;
+	}
+	
+}
