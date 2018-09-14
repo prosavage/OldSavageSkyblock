@@ -29,7 +29,8 @@ public class SavageSkyblock extends JavaPlugin {
         this.getLogger().info("Registering Commands...");
         this.getCommand("skyblock").setExecutor(new CommandManager(this));
 
-
+        //Set up hooks how ever Example:
+        //new HookManager(Arrays.asList(new WorldEditHook(), new VaultHook())));
     }
 
     @Override
