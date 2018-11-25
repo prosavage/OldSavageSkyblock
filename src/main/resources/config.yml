@@ -3,3 +3,69 @@
 # Made with love <3
 
 skyblock-world-name: SavageSkyBlock
+
+general:
+  # The Island Grid is the core system that chooses where an island is placed.
+  # If the grid size is set to 100, that means the grid will be 100x100 map of islands
+  # 100 * 100 = 10000, so 100 islands will fit inside the grid.
+  # This works as a way to limit the number of islands on your server
+  # The smaller the number, the easier it will be for the server to find a spot
+  # on the grid for the new island.
+  grid-size: 100
+  # Island radius in chunks, so if its set to 4, the island will be 4x4 chunks
+  # This means an unit on the aforementioned grid is 10x10 chunks big.
+  # This should be an odd number
+  # THIS SHOULD NOT BE CHANGED ONCE THE FIRST ISLAND IS MADE.
+  island-size: 9
+  # This is the y coordinate the island will be pasted at.
+  island-level: 120
+
+
+
+# This contains the basic setup for islands.
+skyblock-islands:
+  # Each island name must correspond to the filename without the .schematic suffix.
+  island:
+    # This is the name of the island ingame
+    name: "&aClassic"
+    # All items need to be 1.13 item names, they will automatically be converted to legacy items if the server version is lower than 1.13
+    icon: GRASS_BLOCK
+    # The description of the island, will be shown in the island setup GUI
+    # This can be multiple lines long and can contain colorcodes!
+    description:
+    - "&aThe basic starter island!"
+    # This will determine the default-biome of the island
+    # A list of biomes can be found at: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/block/Biome.html
+    default-biome: PLAINS
+    # Permission required to access the island
+    permission: savageskybock.islands.island
+  iceisland:
+    # This is the name of the island ingame
+    name: "&bIce-land"
+    # All items need to be 1.13 item names, they will automatically be converted to legacy items if the server version is lower than 1.13
+    icon: GRASS_BLOCK
+    # The description of the island, will be shown in the island setup GUI
+    # This can be multiple lines long and can contain colorcodes!
+    description:
+    - "&b Survive in a harsh enviorment!"
+    # This will determine the default-biome of the island
+    # A list of biomes can be found at: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/block/Biome.html
+    default-biome: SNOWY_TUNDRA
+    # Permission required to access the island
+    permission: savageskybock.islands.iceisland
+  candylandisland:
+    # This is the name of the island ingame
+    name: "&aC&ba&en&cd&by &aLand!"
+    # All items need to be 1.13 item names, they will automatically be converted to legacy items if the server version is lower than 1.13
+    icon: GRASS_BLOCK
+    # The description of the island, will be shown in the island setup GUI
+    # This can be multiple lines long and can contain colorcodes!
+    description:
+    - "&cCandy!, need I say more?"
+    # This will determine the default-biome of the island
+    # A list of biomes can be found at: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/block/Biome.html
+    default-biome: SAVANNA_PLATEAU
+    # Permission required to access the island
+    permission: savageskybock.islands.candylandisland
+
+

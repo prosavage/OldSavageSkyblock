@@ -112,6 +112,7 @@ public enum DefaultFontInfo {
             if (dFI.getCharacter() == c) return dFI;
         }
         return DefaultFontInfo.DEFAULT;
+
     }
 
     public char getCharacter() {

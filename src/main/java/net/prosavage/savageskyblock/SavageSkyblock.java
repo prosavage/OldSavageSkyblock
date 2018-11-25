@@ -1,33 +1,50 @@
 package net.prosavage.savageskyblock;
 
 import net.prosavage.savageskyblock.cmd.CommandManager;
+import net.prosavage.savageskyblock.island.Island;
+import net.prosavage.savageskyblock.struct.Grid;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SavageSkyblock extends JavaPlugin {
 
-    private static SavageSkyblock INSTANCE;
+    private static SavageSkyblock plugin;
 
     public static SavageSkyblock getInstance() {
-        return INSTANCE;
+        return plugin;
     }
+
+    private Set<Island> islands;
+
+
+    private Grid grid;
 
     @Override
     public void onEnable() {
         this.getLogger().info("=== Enable Start ===");
-        INSTANCE = this;
+        plugin = this;
 
         this.prepareConfigFile();
 
+        this.prepareSchematicFiles();
+
         this.checkDependencies();
+
+        this.grid = new Grid();
 
         this.getLogger().info("Registering Commands...");
         this.getCommand("skyblock").setExecutor(new CommandManager(this));
+
+
+
 
 
     }
@@ -36,6 +53,13 @@ public class SavageSkyblock extends JavaPlugin {
     public void onDisable() {
 
     }
+
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+
 
     private void checkDependencies() {
         List<String> dependencies = this.getDescription().getSoftDepend();
@@ -70,10 +94,36 @@ public class SavageSkyblock extends JavaPlugin {
             this.getLogger().info("Configuration File Found!");
         }
     }
+
+    private void prepareSchematicFiles() {
+        this.getLogger().info("Checking if schematics exist...");
+        if (!this.checkIfSchematicFolderExists()) {
+            this.getLogger().info("Schematics folder not found!");
+            this.getLogger().info("Creating Schematics folder & copying in default schematics...");
+            this.saveResource("schematics\\iceisland.schematic", true);
+            this.saveResource("schematics\\candylandisland.schematic", true);
+            this.saveResource("schematics\\island.schematic", true);
+        } else {
+            this.getLogger().info("Schematics File Found!");
+        }
+    }
+
+    private boolean checkIfSchematicFolderExists() {
+        File schemDir = new File(getDataFolder().getAbsolutePath() + "\\schematics\\");
+        return schemDir.exists();
+    }
+
     private boolean checkIfConfigExists() {
         File configFile = new File(getDataFolder(), "config.yml");
         return configFile.exists();
     }
 
 
+    public Set<Island> getIslands() {
+        return islands;
+    }
+
+    public void setIslands(Set<Island> islands) {
+        this.islands = islands;
+    }
 }

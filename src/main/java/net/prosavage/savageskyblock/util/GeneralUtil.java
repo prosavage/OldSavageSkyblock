@@ -19,6 +19,7 @@ public class GeneralUtil {
     }
 
     public static World getSkyblockWorld() {
+
         return Bukkit.getWorld(SavageSkyblock.getInstance().getConfig().getString("skyblock-world-name"));
     }
 
