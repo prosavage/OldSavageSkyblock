@@ -42,8 +42,8 @@ public class WorldEditHook implements PluginHook {
     public WorldEditHook setup() {
         if (!this.checkIfSchematicFolderExists()) {
             plugin.getLogger().info("Schematics folder not found! creating default schematics....");
-//            plugin.saveResource("schematics\\iceisland.schematic", true);
-//            plugin.saveResource("schematics\\candylandisland.schematic", true);
+            plugin.saveResource("schematics\\iceisland.schematic", true);
+            plugin.saveResource("schematics\\candylandisland.schematic", true);
             plugin.saveResource("schematics\\island.schematic", true);
         } else {
             plugin.getLogger().info("Schematics File Found!");
