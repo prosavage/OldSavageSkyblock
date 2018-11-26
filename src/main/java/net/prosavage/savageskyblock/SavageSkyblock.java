@@ -1,6 +1,7 @@
 package net.prosavage.savageskyblock;
 
 import net.prosavage.savageskyblock.cmd.CommandManager;
+import net.prosavage.savageskyblock.hooks.PluginHookManager;
 import net.prosavage.savageskyblock.island.Island;
 import net.prosavage.savageskyblock.struct.Grid;
 import org.bukkit.Bukkit;
@@ -9,10 +10,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class SavageSkyblock extends JavaPlugin {
 
@@ -22,8 +21,9 @@ public class SavageSkyblock extends JavaPlugin {
         return plugin;
     }
 
-    private Set<Island> islands;
+    private static PluginHookManager pluginHookManager;
 
+    private Set<Island> islands;
 
     private Grid grid;
 
@@ -33,48 +33,24 @@ public class SavageSkyblock extends JavaPlugin {
         plugin = this;
 
         this.prepareConfigFile();
-
-        this.prepareSchematicFiles();
-
-        this.checkDependencies();
-
         this.grid = new Grid();
 
         this.getLogger().info("Registering Commands...");
         this.getCommand("skyblock").setExecutor(new CommandManager(this));
 
-
-
-
-
+        if (hasDependencies()) pluginHookManager = new PluginHookManager();
     }
 
-    @Override
-    public void onDisable() {
-
-    }
-
-
-    public Grid getGrid() {
-        return grid;
-    }
-
-
-
-    private void checkDependencies() {
+    private boolean hasDependencies() {
         List<String> dependencies = this.getDescription().getSoftDepend();
-
         for (String pluginName : dependencies) {
             if (!this.isPluginAvailable(pluginName)) {
                 this.getLogger().info("The plugin \"" + pluginName + "\" is not installed, please install to continue!");
-                this.onDisable();
                 Bukkit.getPluginManager().disablePlugin(this);
-            } else {
-                this.getLogger().info("The dependency \"" + pluginName + "\" was found, hooking into it.");
+                return false;
             }
-
         }
-        this.getLogger().info("All dependencies found!");
+        return true;
     }
 
     private boolean isPluginAvailable(String pluginName) {
@@ -83,6 +59,12 @@ public class SavageSkyblock extends JavaPlugin {
         return ((plugin != null) && (plugin.isEnabled()));
     }
 
+    @Override
+    public void onDisable() {}
+
+    public Grid getGrid() {
+        return grid;
+    }
 
     private void prepareConfigFile() {
         this.getLogger().info("Checking Configuration File...");
@@ -95,29 +77,10 @@ public class SavageSkyblock extends JavaPlugin {
         }
     }
 
-    private void prepareSchematicFiles() {
-        this.getLogger().info("Checking if schematics exist...");
-        if (!this.checkIfSchematicFolderExists()) {
-            this.getLogger().info("Schematics folder not found!");
-            this.getLogger().info("Creating Schematics folder & copying in default schematics...");
-            this.saveResource("schematics\\iceisland.schematic", true);
-            this.saveResource("schematics\\candylandisland.schematic", true);
-            this.saveResource("schematics\\island.schematic", true);
-        } else {
-            this.getLogger().info("Schematics File Found!");
-        }
-    }
-
-    private boolean checkIfSchematicFolderExists() {
-        File schemDir = new File(getDataFolder().getAbsolutePath() + "\\schematics\\");
-        return schemDir.exists();
-    }
-
     private boolean checkIfConfigExists() {
         File configFile = new File(getDataFolder(), "config.yml");
         return configFile.exists();
     }
-
 
     public Set<Island> getIslands() {
         return islands;
